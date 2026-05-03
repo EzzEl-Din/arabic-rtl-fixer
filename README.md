@@ -91,7 +91,15 @@
 
 **٣. Renderer** — يحوّل الـ tokens لـ DOM: الـ LTR tokens في `<bdi>`, الباقي text nodes عادية
 
-**٤. MutationObserver** — يراقب المحتوى الديناميكي (SPAs, lazy loading)
+**٤. MutationObserver + Debounce** — يراقب المحتوى الديناميكي بذكاء
+
+المواقع اللي بتعمل **streaming** زي Claude.ai, ChatGPT, Gemini بترسم الرد حرف حرف، فالـ observer بيتفعّل مئات المرات في الثانية. بدل ما نصلح كل حرف، بنستنى 300ms من آخر تغيير وبعدين نصلح مرة واحدة:
+
+```
+حرف → حرف → حرف → ... → [300ms سكوت] → إصلاح ✅
+```
+
+ده بيشتغل كمان على المواقع الديناميكية العادية (React, Vue, SPAs, lazy loading).
 
 **٥. Input Watcher** — يضبط الـ inputs أثناء الكتابة
 
