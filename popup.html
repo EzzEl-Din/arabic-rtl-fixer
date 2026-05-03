@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 270px; font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #0f0f0f; color: #f0f0f0; direction: rtl;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      padding: 14px 16px; border-bottom: 2px solid #e2b35a;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-text h1 { font-size: 14px; font-weight: 700; color: #e2b35a; }
+    .header-text p  { font-size: 10px; color: #666; margin-top: 2px; }
+    .badge {
+      font-size: 9px; background: #e2b35a22; color: #e2b35a;
+      border: 1px solid #e2b35a55; padding: 2px 7px; border-radius: 20px;
+    }
+    .section { padding: 12px 14px; border-bottom: 1px solid #1e1e1e; }
+    .row {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 8px;
+    }
+    .row:last-child { margin-bottom: 0; }
+    .label { font-size: 12px; color: #ccc; }
+    .sublabel { font-size: 10px; color: #555; margin-top: 2px; }
+    .toggle { position: relative; width: 38px; height: 20px; flex-shrink: 0; }
+    .toggle input { display: none; }
+    .slider {
+      position: absolute; inset: 0; background: #333;
+      border-radius: 20px; cursor: pointer; transition: 0.25s;
+    }
+    .slider::before {
+      content: ''; position: absolute; width: 14px; height: 14px;
+      left: 3px; top: 3px; background: #888; border-radius: 50%; transition: 0.25s;
+    }
+    .toggle input:checked + .slider { background: #e2b35a22; border: 1px solid #e2b35a; }
+    .toggle input:checked + .slider::before { transform: translateX(18px); background: #e2b35a; }
+    .site-row {
+      background: #1a1a1a; border-radius: 8px; padding: 8px 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .site-name {
+      font-size: 11px; color: #888; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap; direction: ltr; text-align: left;
+    }
+    .btn {
+      width: 100%; padding: 8px; border: none; border-radius: 7px;
+      cursor: pointer; font-size: 11px; font-family: inherit;
+      font-weight: 600; transition: 0.2s; margin-bottom: 6px;
+    }
+    .btn:last-child { margin-bottom: 0; }
+    .btn-fix { background: #e2b35a; color: #0f0f0f; }
+    .btn-fix:hover { background: #d4a44a; }
+    .btn-reset { background: #1e1e1e; color: #666; border: 1px solid #2a2a2a; }
+    .btn-reset:hover { background: #252525; color: #999; }
+    .shortcut { font-size: 10px; color: #444; text-align: center; padding: 8px 0 6px; }
+    .key {
+      display: inline-block; background: #1e1e1e; border: 1px solid #333;
+      border-radius: 4px; padding: 1px 5px; font-size: 10px;
+      color: #888; font-family: monospace;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #e2b35a;
+      flex-shrink: 0; animation: pulse 1.5s infinite;
+    }
+    .dot.off { background: #444; animation: none; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-text">
+      <h1>🔤 Arabic RTL Fixer</h1>
+      <p>v1.1.0 — open source</p>
+    </div>
+    <span class="badge" id="statusBadge">نشط</span>
+  </div>
+
+  <div class="section">
+    <div class="row">
+      <div>
+        <div class="label">تفعيل عام</div>
+        <div class="sublabel">يشتغل على كل المواقع</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="globalToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="row" style="margin-bottom:8px">
+      <div class="label">هذا الموقع</div>
+      <div class="dot" id="siteDot"></div>
+    </div>
+    <div class="site-row">
+      <span class="site-name" id="siteName">...</span>
+      <label class="toggle">
+        <input type="checkbox" id="siteToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section">
+    <button class="btn btn-fix" id="fixBtn">🔄 إصلاح الصفحة الآن</button>
+    <button class="btn btn-reset" id="resetBtn">↩️ إعادة تعيين</button>
+  </div>
+
+  <div class="shortcut">
+    اضغط <span class="key">Alt</span> + <span class="key">R</span> للتبديل السريع
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

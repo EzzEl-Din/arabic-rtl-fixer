@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Arabic RTL Fixer",
+  "short_name": "RTL Fixer",
+  "version": "1.2.2",
+  "description": "Automatically fixes Arabic text direction on any website. Works with mixed Arabic/English content in real-time.",
+  "homepage_url": "https://github.com/[your-username]/arabic-rtl-fixer",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Arabic RTL Fixer",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Build outputs
+*.zip
+*.crx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Node (if used for build tools later)
+node_modules/
